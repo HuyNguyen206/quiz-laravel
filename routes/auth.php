@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Middleware\IsAdmin;
+use App\Livewire\Questions\CreateQuestion;
+use App\Livewire\Questions\QuestionList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -29,6 +32,12 @@ Route::middleware('auth')->group(function () {
 
     Volt::route('confirm-password', 'pages.auth.confirm-password')
         ->name('password.confirm');
+
+    Route::middleware(IsAdmin::class)->group(function () {
+        Route::get('questions', QuestionList::class)->name('questions');
+        Route::get('questions/create', CreateQuestion::class)->name('questions.create');
+        Route::get('questions/{question}', CreateQuestion::class)->name('questions.edit');
+    });
 });
 
 Route::middleware('guest')->group(function () {
