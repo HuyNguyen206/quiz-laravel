@@ -7,16 +7,34 @@ use Livewire\Form;
 
 class QuestionForm extends Form
 {
-    #[Validate('required|string')]
     public $question_text = '';
 
-    #[Validate('string|nullable|required')]
     public $code_snippet = '';
 
-    #[Validate('string|nullable|required')]
     public $answer_explanation = '';
 
-    #[Validate('url|nullable|required')]
     public $more_info_link = '';
 
+    public array $question_options = [];
+
+    public function rules()
+    {
+        return [
+            'question_text' => [
+                'required',
+                'string',
+            ],
+            'code_snippet' => 'required|string|nullable',
+            'answer_explanation' => 'required|string|nullable',
+            'more_info_link' => 'required|url|nullable',
+            'question_options' => [
+                'required',
+                'array',
+            ],
+            'question_options.*.option' => [
+                'required',
+                'string',
+            ],
+        ];
+    }
 }

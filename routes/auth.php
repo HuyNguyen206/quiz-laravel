@@ -3,8 +3,10 @@
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Middleware\IsAdmin;
+use App\Livewire\Forms\QuizForm;
 use App\Livewire\Questions\CreateQuestion;
 use App\Livewire\Questions\QuestionList;
+use App\Livewire\Quiz\CreateQuiz;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -37,6 +39,10 @@ Route::middleware('auth')->group(function () {
         Route::get('questions', QuestionList::class)->name('questions');
         Route::get('questions/create', CreateQuestion::class)->name('questions.create');
         Route::get('questions/{question}', CreateQuestion::class)->name('questions.edit');
+
+        Route::get('quizzes', \App\Livewire\Quiz\QuizList::class)->name('quizzes');
+        Route::get('quizzes/create', CreateQuiz::class)->name('quiz.create');
+        Route::get('quizzes/{quiz}', CreateQuiz::class)->name('quiz.edit');
     });
 });
 

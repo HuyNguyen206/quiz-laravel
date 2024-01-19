@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+//Route::view('/', 'welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('quiz/{quiz}/{slug?}', [HomeController::class, 'show'])->name('quiz.show');
+Route::get('results/{test}', [ResultController::class, 'show'])->name('results.show');
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
