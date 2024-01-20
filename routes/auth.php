@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\ResultController;
 use App\Http\Middleware\IsAdmin;
 use App\Livewire\Forms\QuizForm;
 use App\Livewire\Questions\CreateQuestion;
@@ -35,6 +37,9 @@ Route::middleware('auth')->group(function () {
     Volt::route('confirm-password', 'pages.auth.confirm-password')
         ->name('password.confirm');
 
+    Route::get('results', [ResultController::class, 'index'])->name('results.index');
+
+
     Route::middleware(IsAdmin::class)->group(function () {
         Route::get('questions', QuestionList::class)->name('questions');
         Route::get('questions/create', CreateQuestion::class)->name('questions.create');
@@ -43,6 +48,8 @@ Route::middleware('auth')->group(function () {
         Route::get('quizzes', \App\Livewire\Quiz\QuizList::class)->name('quizzes');
         Route::get('quizzes/create', CreateQuiz::class)->name('quiz.create');
         Route::get('quizzes/{quiz}', CreateQuiz::class)->name('quiz.edit');
+
+        Route::get('tests', TestController::class)->name('tests');
     });
 });
 

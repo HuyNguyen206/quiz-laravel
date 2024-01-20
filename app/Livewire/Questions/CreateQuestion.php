@@ -54,6 +54,7 @@ class CreateQuestion extends Component
         try {
             DB::beginTransaction();
             if ($this->question->exists) {
+                $this->question->update($this->form->except('question_options'));
                 $this->question->questionOptions()->delete();
             } else {
                 $this->question = Question::create($this->form->except('question_options'));

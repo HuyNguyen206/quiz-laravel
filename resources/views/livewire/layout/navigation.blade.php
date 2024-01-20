@@ -30,6 +30,12 @@ new class extends Component
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('leaderboard')" :active="request()->routeIs('leaderboard')">
+                        Leaderboard
+                    </x-nav-link>
+                    <x-nav-link :href="route('results.index')" :active="request()->routeIs('results.index')">
+                        My Results
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -57,6 +63,9 @@ new class extends Component
                         <x-dropdown-link :href="route('quizzes')">
                             Quizzes
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('tests')">
+                            Tests
+                        </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
                 @endadmin
@@ -77,7 +86,6 @@ new class extends Component
                         <x-dropdown-link :href="route('profile')" wire:navigate>
                             {{ __('Profile') }}
                         </x-dropdown-link>
-
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
@@ -124,8 +132,13 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
+
                 <x-responsive-nav-link :href="route('profile')" wire:navigate>
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('results.index')" wire:navigate>
+                    My Results
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

@@ -23,8 +23,9 @@ class Test extends Model
         return $this->belongsTo(Quiz::class);
     }
 
-    public function questions(): BelongsToMany
+    public function answers()
     {
-        return $this->belongsToMany(Question::class, 'test_answers', 'test_id', 'question_id');
+        return $this->hasMany(TestAnswer::class);
     }
+
 }

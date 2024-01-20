@@ -7,9 +7,17 @@ use App\Models\TestAnswer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class ResultController extends Controller
 {
+    public function index(): View
+    {
+        $results = Test::with('quiz')->withCount('answers')->where('user_id', auth()->id())->paginate();
+
+        return view('front.results.index', compact('results'));
+    }
+
     public function show(Test $test)
     {
         $total_questions = $test->quiz->questions->count();
